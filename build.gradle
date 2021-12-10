@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'scala'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'com.github'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "15"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+mainClassName = 'chat.ui.StartUI'
+
+compileScala {
+    apply plugin: 'scala'
+}
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+    }
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        compile group: 'com.typesafe.akka', name: 'akka-actor_2.13', version: '2.6.9'
+        compile group: 'com.typesafe.akka', name: 'akka-cluster_2.13', version: '2.6.9'
+        compile group: 'com.typesafe.akka', name: 'akka-cluster-tools_2.13', version: '2.6.9'
+        compile group: 'org.scala-lang', name: 'scala-library', version: '2.13.3'
+        testCompile group: 'com.typesafe.akka', name: 'akka-serialization-jackson_2.13', version: '2.6.10'
+    }
+}
